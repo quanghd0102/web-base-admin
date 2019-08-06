@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Icon, Button, Checkbox } from 'antd';
 import i18n from 'i18next';
-import MaterialInput from '../../components/MaterialInput';
+import MaterialInput from 'components/MaterialInput';
 
 const FormItem = Form.Item;
 

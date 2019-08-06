@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { flatMap, map } from 'lodash';
-import PrivateLayout from '../../layout/PrivateLayout';
-// import NotFoundPage from '../../components/404Page';
-import Home from '../../pages/Dashboard';
+import PrivateLayout from 'layout/PrivateLayout';
+// import NotFoundPage from 'components/404Page';
+import Home from 'pages/Dashboard';
 
 const routes = [
   {

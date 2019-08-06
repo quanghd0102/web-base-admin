@@ -1,7 +1,7 @@
 import React from 'react';
 import i18next from 'i18next';
+import PageTitle from 'components/PageTitle';
 import DashboardWrapper from './styles';
-import PageTitle from '../../components/PageTitle';
 
 const Dashboard = () => {
   return (

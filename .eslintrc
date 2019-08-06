@@ -1,6 +1,13 @@
 {
   "parser": "babel-eslint",
   "extends": ["airbnb", "prettier"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  },
   "env": {
     "browser": true
   },

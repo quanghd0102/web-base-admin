@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { ConnectedRouter } from 'connected-react-router';
 import { ConfigProvider, Empty } from 'antd';
-import theme from './configs/theme';
-import Routes from './routes';
+import * as serviceWorker from 'serviceWorker';
+import theme from 'configs/theme';
+import Routes from 'routes';
 import './configs/language';
-import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>

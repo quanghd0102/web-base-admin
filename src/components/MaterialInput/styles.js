@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from '../../configs/theme';
+import theme from 'configs/theme';
 
 export default styled.div`
   margin-top: 20px;

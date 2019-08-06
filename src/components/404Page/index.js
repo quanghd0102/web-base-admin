@@ -1,6 +1,6 @@
 import React from 'react';
+import NotFoundIcon from 'assets/icons/404-error.svg';
 import NotFoundPageWrapper from './styles';
-import NotFoundIcon from '../../assets/icons/404-error.svg';
 
 const NotFoundPage = () => {
   return (
