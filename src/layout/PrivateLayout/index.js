@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { Layout, Menu, Icon, Dropdown, Avatar } from 'antd';
 import { findLast } from 'lodash';
 import PrivateLayoutWrapper from './styles';
@@ -34,11 +36,15 @@ const profileMenu = [
 ];
 
 const PrivateLayout = ({ children }) => {
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const [collapsed, setCollapsed] = useState(false);
   const [defaultSelectedKeys] = useState(
     findLast(sidebarMenu, menu => window.location.pathname.indexOf(menu.url) === 0) ||
       sidebarMenu[0]
   );
+  if (!isAuthenticated) {
+    return <Redirect to="/login" />;
+  }
 
   const toggle = () => {
     setCollapsed(!collapsed);

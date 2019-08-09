@@ -1,19 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { Form, Icon, Button, Checkbox } from 'antd';
 import i18n from 'i18next';
 import MaterialInput from 'components/MaterialInput';
+// import actions
+import { loginAction } from 'redux/auth/actions';
 
 const FormItem = Form.Item;
 
 const Login = ({ form }) => {
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
   const { getFieldDecorator } = form;
+
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        console.log('login form:', values);
+        console.log(values);
+        dispatch(loginAction(values));
       }
     });
   };

@@ -1,20 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
-import { ConnectedRouter } from 'connected-react-router';
 import { ConfigProvider, Empty } from 'antd';
 import * as serviceWorker from 'serviceWorker';
-import theme from 'configs/theme';
 import Routes from 'routes';
+import store from 'redux/store';
 import './configs/language';
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
+  <Provider store={store}>
     <ConfigProvider renderEmpty={() => <Empty />}>
       <Routes />
     </ConfigProvider>
-  </ThemeProvider>,
+  </Provider>,
   document.getElementById('root')
 );
 

@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { forwardRef } from 'react';
 import { Input } from 'antd';
 import MaterialInputWrapper from './styles';
 
-const MaterialInput = ({ placeholder, prefix, ...params }) => (
-  <MaterialInputWrapper isPrefix={!!prefix}>
+// eslint-disable-next-line
+const MaterialInput = ({ placeholder, prefix, ...params }, ref) => (
+  <MaterialInputWrapper isPrefix={!!prefix} ref={ref}>
     <Input {...params} />
     {prefix}
     <label>{placeholder}</label>
@@ -12,9 +12,4 @@ const MaterialInput = ({ placeholder, prefix, ...params }) => (
   </MaterialInputWrapper>
 );
 
-MaterialInput.propTypes = {
-  placeholder: PropTypes.string,
-  prefix: PropTypes.any,
-};
-
-export default MaterialInput;
+export default forwardRef(MaterialInput);

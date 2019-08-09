@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@manaflair/redux-batch": "^1.0.0",
     "antd": "^3.21.1",
     "connected-react-router": "^6.5.2",
+    "history": "^4.9.0",
     "i18next": "^17.0.8",
     "i18next-browser-languagedetector": "^3.0.2",
     "lodash": "^4.17.15",
@@ -16,6 +18,9 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^1.0.5",
+    "redux-starter-kit": "^0.6.3",
     "styled-components": "^4.3.2"
   },
   "scripts": {
@@ -40,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.4.4",
     "babel-plugin-import": "^1.12.0",
     "customize-cra": "^0.4.1",
     "eslint-config-airbnb": "^17.1.1",
