@@ -4,13 +4,14 @@ import i18next from 'i18next';
 // import components
 import PageTitle from 'components/PageTitle';
 import MaterialInput from 'components/MaterialInput';
+import PrivateLayout from 'layout/PrivateLayout';
 // import containers
 import AdminForm from 'containers/Admin/Form';
 
 const { Item } = Form;
 
 const UsersCreate = () => (
-  <div>
+  <PrivateLayout>
     <PageTitle>{i18next.t('users.title')}</PageTitle>
     <div className="mainContent">
       <AdminForm
@@ -44,7 +45,7 @@ const UsersCreate = () => (
         )}
       />
     </div>
-  </div>
+  </PrivateLayout>
 );
 
 export default UsersCreate;
