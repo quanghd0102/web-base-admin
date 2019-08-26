@@ -8,6 +8,7 @@ export default styled.div`
   label {
     position: absolute !important;
     left: ${props => (props.isPrefix ? '30px' : '11px')};
+    right: ${props => (props.isSuffix ? '30px' : '11px')};
     line-height: 1.5;
     top: 4px;
     transition: 300ms ease all;
@@ -22,6 +23,7 @@ export default styled.div`
     border-radius: 0;
     display: block;
     padding-left: ${props => (props.isPrefix ? '30px' : '11px')};
+    padding-right: ${props => (props.isSuffix ? '30px' : '11px')};
 
     &:focus {
       outline: none;
@@ -61,10 +63,22 @@ export default styled.div`
     }
   }
 
-  i {
+  .prefix {
     position: absolute;
     top: 8px;
     left: 11px;
     pointer-events: none;
+  }
+
+  .suffix {
+    position: absolute;
+    top: 8px;
+    right: 11px;
+    color: rgba(0, 0, 0, 0.45);
+
+    &:focus,
+    &:hover {
+      color: #333;
+    }
   }
 `;

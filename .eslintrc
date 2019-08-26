@@ -11,7 +11,7 @@
   "env": {
     "browser": true
   },
-  "plugins": ["react"],
+  "plugins": ["react", "react-hooks"],
   "globals": {
     "describe": true,
     "it": true,
@@ -28,11 +28,15 @@
     "no-use-before-define": 0,
     "eqeqeq": 0,
     "no-param-reassign": 0,
+    "no-console": 0,
     "jsx-a11y/label-has-for": 0,
     "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/anchor-is-valid": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/destructuring-assignment": 0,
     "react/require-default-props": 0,
-    "react/forbid-prop-types": 0
+    "react/forbid-prop-types": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn" // <--- THIS IS THE NEW RULE
   }
 }

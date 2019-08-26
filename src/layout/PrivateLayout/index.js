@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { Layout, Menu, Icon, Dropdown, Avatar } from 'antd';
 import { findLast } from 'lodash';
 import PrivateLayoutWrapper from './styles';
@@ -58,8 +58,10 @@ const PrivateLayout = ({ children }) => {
           <Menu mode="inline" defaultSelectedKeys={[defaultSelectedKeys.key]}>
             {sidebarMenu.map(menu => (
               <Menu.Item key={menu.key}>
-                <Icon type={menu.icon} />
-                <span>{menu.text}</span>
+                <Link to={menu.url}>
+                  <Icon type={menu.icon} />
+                  <span>{menu.text}</span>
+                </Link>
               </Menu.Item>
             ))}
           </Menu>

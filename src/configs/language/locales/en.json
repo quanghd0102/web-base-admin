@@ -1,5 +1,7 @@
 {
   "input": {
+    "show": "Show",
+    "hide": "Hide",
     "username": {
       "placeholder": "Username",
       "validateMsg": {

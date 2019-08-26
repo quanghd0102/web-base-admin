@@ -4,12 +4,32 @@ import { flatMap, map } from 'lodash';
 import PrivateLayout from 'layout/PrivateLayout';
 // import NotFoundPage from 'components/404Page';
 import Home from 'pages/Dashboard';
+import Users from 'pages/Users';
+import UsersCreate from 'pages/Users/Create';
+import UsersEdit from 'pages/Users/Edit';
 
 const routes = [
   {
     path: '/',
     component: Home,
     exact: true,
+  },
+  {
+    path: '/users',
+    routes: [
+      {
+        path: '/',
+        component: Users,
+      },
+      {
+        path: '/create',
+        component: UsersCreate,
+      },
+      {
+        path: '/:id',
+        component: UsersEdit,
+      },
+    ],
   },
 ];
 

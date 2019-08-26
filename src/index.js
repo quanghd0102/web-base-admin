@@ -1,17 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import { ConfigProvider, Empty } from 'antd';
 import * as serviceWorker from 'serviceWorker';
 import Routes from 'routes';
-import store from 'redux/store';
+import store, { history } from 'redux/store';
 import './configs/language';
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConfigProvider renderEmpty={() => <Empty />}>
-      <Routes />
-    </ConfigProvider>
+    <ConnectedRouter history={history}>
+      <ConfigProvider renderEmpty={() => <Empty />}>
+        <Routes />
+      </ConfigProvider>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 );

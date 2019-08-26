@@ -1,4 +1,4 @@
-const { override, fixBabelImports, addLessLoader, addDecoratorsLegacy } = require('customize-cra');
+const { override, fixBabelImports, addLessLoader, addDecoratorsLegacy, useBabelRc } = require('customize-cra');
 const themeConfig = require('./src/configs/theme');
 
 /* eslint-disable */
@@ -14,5 +14,6 @@ module.exports = override(
       '@primary-color': themeConfig.palette.primaryColor,
     },
   }),
-  addDecoratorsLegacy()
+  addDecoratorsLegacy(),
+  useBabelRc()
 );

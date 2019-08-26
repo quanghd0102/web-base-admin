@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import PrivateRoutes from './PrivateRoutes';
 import PublicRoutes from './PublicRoutes';
 import RoutesWrapper from './styles';
@@ -21,10 +20,8 @@ const Routes = () => {
 
   return (
     <RoutesWrapper>
-      <Router>
-        <PublicRoutes />
-        <PrivateRoutes />
-      </Router>
+      <PublicRoutes />
+      <PrivateRoutes />
     </RoutesWrapper>
   );
 };

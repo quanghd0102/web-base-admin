@@ -5,14 +5,15 @@ import logger from 'redux-logger';
 import { reduxBatch } from '@manaflair/redux-batch';
 import { createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
+import { routerMiddleware } from 'connected-react-router';
 import reducer from './reducers';
 import rootSaga from './sagas';
 
 export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
-  reducer,
-  middleware: [...getDefaultMiddleware(), logger, sagaMiddleware],
+  middleware: [...getDefaultMiddleware(), logger, sagaMiddleware, routerMiddleware(history)],
+  reducer: reducer(history),
   devTools: process.env.NODE_ENV !== 'production',
   enhancers: [reduxBatch],
 });

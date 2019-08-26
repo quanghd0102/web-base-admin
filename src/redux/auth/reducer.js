@@ -2,7 +2,7 @@ import { createReducer } from 'redux-starter-kit';
 import { loginSuccessAction } from './actions';
 
 export const initialState = {
-  isAuthenticated: false,
+  isAuthenticated: true,
   roles: '',
 };
 

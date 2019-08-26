@@ -24,7 +24,7 @@ const PrivateLayoutWrapper = styled.div`
     position: fixed;
     left: 0;
     background: #fff;
-    border-right: 1px solid #e8e8e8;
+    ${'' /* border-right: 1px solid #e8e8e8; */}
 
     .ant-menu {
       border-right: 1px solid #fff;
