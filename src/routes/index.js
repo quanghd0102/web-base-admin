@@ -1,20 +1,15 @@
 import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import {concat} from 'lodash';
+import { concat, filter } from 'lodash';
 import NotFoundPage from 'components/404Page';
 import listPrivateRoutes from './PrivateRoutes';
 import listPublicRoutes from './PublicRoutes';
+import ModalRoutes from './ModalRoutes';
 import RoutesWrapper from './styles';
 
-const listRoutes = concat(listPrivateRoutes, listPublicRoutes);
-const MainRoutes = () => (
-  <Switch>
-    {listRoutes.map(route => (
-      <Route {...route} />
-    ))}
-    <Route component={NotFoundPage} />
-  </Switch>
-)
+const listAllRoutes = concat(listPrivateRoutes, listPublicRoutes);
+const listMainRoutes = filter(listAllRoutes, route => !route.isModal);
+const listModalRoutes = filter(listAllRoutes, route => route.isModal);
 
 const Routes = () => {
   useEffect(() => {
@@ -34,11 +29,23 @@ const Routes = () => {
   return (
     <RoutesWrapper>
       <Switch>
-        {listRoutes.map(route => (
+        {listMainRoutes.map(route => (
           <Route {...route} />
         ))}
+        {listModalRoutes.map(route => (
+          <Route
+            {...route}
+            component={() => (
+              <div>
+                <route.parentComponent />
+                <route.component />
+              </div>
+)}
+          />
+      ))}
         <Route component={NotFoundPage} />
       </Switch>
+      <ModalRoutes />
     </RoutesWrapper>
   );
 };

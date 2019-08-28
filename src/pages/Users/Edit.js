@@ -1,57 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'antd';
-import i18next from 'i18next';
+// import i18next from 'i18next';
 // import components
-import PageTitle from 'components/PageTitle';
 import MaterialInput from 'components/MaterialInput';
-import PrivateLayout from 'layout/PrivateLayout';
 // import containers
 import AdminForm from 'containers/Admin/Form';
 
 const { Item } = Form;
 
-const UsersEdit = ({ match }) => (
-  <PrivateLayout>
-    <PageTitle>{i18next.t('users.title')}</PageTitle>
-    <div className="mainContent">
-      <AdminForm
-        resource="users"
-        id={match && match.params && match.params.id}
-        render={getFieldDecorator => (
-          <div>
-            <div>
-              {getFieldDecorator('id', {
-                initialValue: '123',
+const UsersEdit = ({ id }) => (
+  <AdminForm
+    resource="users"
+    id={id}
+    render={getFieldDecorator => (
+      <div>
+        <div>
+          {getFieldDecorator('id', {
+                initialValue: {id},
               })(<MaterialInput type="hidden" />)}
-            </div>
-            <Item>
-              {getFieldDecorator('username', {
-                rules: [{ required: true, message: 'Please input your username!' }],
+        </div>
+        <Item>
+          {getFieldDecorator('username', {
+                rules: [{ required: true }],
               })(<MaterialInput placeholder="username" />)}
-            </Item>
-            <Item>
-              {getFieldDecorator('email', {
-                rules: [{ required: true, message: 'Please input your email!' }],
+        </Item>
+        <Item>
+          {getFieldDecorator('email', {
+                rules: [{ required: true }],
               })(<MaterialInput placeholder="Email" />)}
-            </Item>
-            <Item>
-              {getFieldDecorator('phoneNumber', {
-                rules: [{ required: true, message: 'Please input your phone!' }],
+        </Item>
+        <Item>
+          {getFieldDecorator('phoneNumber', {
+                rules: [{ required: true }],
               })(<MaterialInput placeholder="Phone" />)}
-            </Item>
-            <Button type="primary" htmlType="submit">
+        </Item>
+        <Button type="primary" htmlType="submit">
               Edit
-            </Button>
-          </div>
+        </Button>
+      </div>
         )}
-      />
-    </div>
-  </PrivateLayout>
+  />
 );
 
 UsersEdit.propTypes = {
-  match: PropTypes.object,
+  id: PropTypes.any,
 };
 
 export default UsersEdit;

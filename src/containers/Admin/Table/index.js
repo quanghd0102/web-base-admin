@@ -61,7 +61,7 @@ const AdminTable = ({ children, isActionCol, isSearch = true, resource }) => {
   return (
     <AdminTableWrapper>
       <div className="action-div">
-        <Link to={`/${resource}/create`}>
+        <Link to={{ hash: `/${resource}/create` }}>
           <Button type="primary">{i18next.t('form.btn.add')}</Button>
         </Link>
       </div>
@@ -95,7 +95,7 @@ const AdminTable = ({ children, isActionCol, isSearch = true, resource }) => {
                 }}
                 role="presentation"
               >
-                <Link to={`/${resource}/${record.id}`}>
+                <Link to={{ hash: `/${resource}/${record.id}` }}>
                   <Icon type="form" />
                 </Link>
                 <Divider type="vertical" />
