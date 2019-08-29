@@ -72,8 +72,6 @@ const ModalRoutes = ({ location, history }) => {
       setParams(null);
     }, 500);
   }
-  
-  console.log(modalRoute);
 
   return (
     <Drawer
