@@ -6,12 +6,14 @@ import { ConfigProvider, Empty } from 'antd';
 import * as serviceWorker from 'serviceWorker';
 import Routes from 'routes';
 import store, { history } from 'redux/store';
+import GlobalStyle from './styles';
 import './configs/language';
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <ConfigProvider renderEmpty={() => <Empty />}>
+        <GlobalStyle />
         <Routes />
       </ConfigProvider>
     </ConnectedRouter>

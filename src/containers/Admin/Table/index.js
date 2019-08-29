@@ -53,7 +53,9 @@ const AdminTable = ({ children, isActionCol, isSearch = true, resource }) => {
   const onRow = record => {
     return {
       onClick: () => {
-        history.push(`/${resource}/${record.id}`);
+        const {location} = history;
+        const {hash, ...newLocation} = location;
+        history.push({...newLocation, hash: `/${resource}/${record.id}`}); 
       },
     };
   };

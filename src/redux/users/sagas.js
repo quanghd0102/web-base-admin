@@ -43,6 +43,7 @@ function* submitFormDataSaga({ payload = {} }) {
     } else {
       yield call(createNewData, paramsReq);
     }
+    yield put(fetchListDataAction());
     yield put(push(`/users`));
   } catch (ex) {
     console.error(ex);

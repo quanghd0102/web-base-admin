@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from "react-router";
-import {Drawer} from 'antd';
+import {Drawer, PageHeader} from 'antd';
 import {flatMapDepth, map, find} from 'lodash';
+import i18next from 'i18next';
 import UrlPattern from 'url-pattern';
 // import pages 
 import UsersCreate from 'pages/Users/Create';
@@ -15,10 +16,12 @@ const routes = [
     routes: [
       {
         path: '/create',
+        title: 'users.form.createTitle',
         component: UsersCreate,
       },
       {
         path: '/:id',
+        title: 'users.form.editTitle',
         component: UsersEdit,
       },
     ],
@@ -53,6 +56,10 @@ const ModalRoutes = ({ location, history }) => {
     if(modalComponent) {
       setVisible(true);
       setModalRoute(modalComponent);
+    } else {
+      setVisible(false);
+      setModalRoute(null);
+      setParams(null);
     }
   }, [location])
 
@@ -66,11 +73,14 @@ const ModalRoutes = ({ location, history }) => {
     }, 500);
   }
   
+  console.log(modalRoute);
 
   return (
     <Drawer
-      title="Basic Drawer"
+      className="route-modal"
+      title={<PageHeader onBack={onClose} title={modalRoute && modalRoute.title ? i18next.t(modalRoute.title) : i18next.t("default.title")} />}
       placement="right"
+      closable={false}
       onClose={onClose}
       visible={visible}
     >

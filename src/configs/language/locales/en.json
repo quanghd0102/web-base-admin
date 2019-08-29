@@ -23,6 +23,10 @@
     }
   },
 
+  "default": {
+    "title": "Title"
+  },
+
   "login": {
     "title": "Login",
     "rememberMe": "Remember me",
@@ -35,7 +39,11 @@
   },
 
   "users": {
-    "title": "Users"
+    "title": "Users",
+    "form": {
+      "createTitle": "Add new User",
+      "editTitle": "Edit User"
+    }
   },
 
   "posts": {
