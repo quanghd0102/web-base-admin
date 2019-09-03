@@ -7,6 +7,7 @@ import {
 
 export const initialState = {
   listData: [],
+  totalData: 0,
   isFetching: false,
   currentSelected: null,
 };
@@ -16,8 +17,9 @@ const fetchListData = state => {
 };
 
 const fetchListDataSuccess = (state, { payload }) => {
-  const { data } = payload;
+  const { data, total } = payload;
   state.listData = data;
+  state.totalData = total;
   state.isFetching = false;
 };
 

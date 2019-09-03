@@ -71,6 +71,7 @@ const PrivateLayout = ({ children }) => {
             marginLeft: collapsed ? 80 : 200,
             transition: 'all 0.2s ease 0s',
             background: '#F4F6FC',
+            'minHeight': '100vh',
           }}
         >
           <Header className="header">

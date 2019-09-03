@@ -1,3 +1,5 @@
+import {convertJsonToQueryString} from 'utils';
+
 const checkIfErrorOccurs = res => {
   return {
     code: res.status,
@@ -82,7 +84,7 @@ function requestWrapper(method) {
       // GET doesn't have data
       convertParams = convertData;
       if (convertParams !== null) {
-        convertUrl = `${convertUrl}?${getQueryString(convertParams)}`;
+        convertUrl = `${convertUrl}?${convertJsonToQueryString(convertParams)}`;
       }
       convertData = null;
     } else if (convertData === Object(convertData)) {
@@ -121,13 +123,6 @@ function requestWrapper(method) {
     };
     return customFetch(convertUrl, paramsObj);
   };
-}
-
-function getQueryString(params) {
-  const esc = encodeURIComponent;
-  return Object.keys(params)
-    .map(k => `${esc(k)}=${esc(params[k])}`)
-    .join('&');
 }
 
 export const getAPI = requestWrapper('GET');

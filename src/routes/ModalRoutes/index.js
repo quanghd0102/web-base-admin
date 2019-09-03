@@ -8,7 +8,7 @@ import UrlPattern from 'url-pattern';
 // import pages 
 import UsersCreate from 'pages/Users/Create';
 import UsersEdit from 'pages/Users/Edit';
-import {closeHashModal} from 'utils';
+import {updateHashUrl} from 'utils';
 
 const routes = [
   {
@@ -39,7 +39,7 @@ const listModalRoutes = flatMapDepth(routes, route => {
   return route;
 });
 
-const ModalRoutes = ({ location, history }) => {
+const ModalRoutes = ({ location }) => {
   // hooks
   const [visible, setVisible] = useState(false);
   const [modalRoute, setModalRoute] = useState(null);
@@ -65,7 +65,7 @@ const ModalRoutes = ({ location, history }) => {
 
   // functions
   const onClose = () => {
-    closeHashModal(history);
+    updateHashUrl('');
     setVisible(false);
     setTimeout(() => {
       setModalRoute(null);

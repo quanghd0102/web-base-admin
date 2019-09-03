@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import i18next from 'i18next';
 import { Table, Divider, Icon, Popconfirm, Button } from 'antd';
-import { history } from 'redux/store';
+import { updateHashUrl, updateSearchUrl, convertJsonToQueryString, getQueryParamsUrl } from 'utils';
+import { forEach } from 'lodash';
 // import actions
 import { fetchListBaseAction, deleteDataByIdBaseAction } from 'redux/base/actions';
 // import selector
@@ -13,25 +14,30 @@ import AdminTableWrapper from './styles';
 import filterSearch from './FilterSearch';
 
 const { Column } = Table;
+const limitRecords = 10;
 
 const AdminTable = ({ children, isActionCol, isSearch = true, resource }) => {
   // redux hooks
   const dispatch = useDispatch();
+  const searchInput = useRef(null);
   const isFetching = useSelector(state => state[resource]?.isFetching);
   const listResource = useSelector(state => getListDataSelector(state, resource));
+  const totalResource = useSelector(state => state[resource].totalData);
+  // eslint-disable-next-line
+  const [searchText, setSearchText] = useState('');
+  const [queryParams, setQueryParams] = useState(null);
+  useEffect(() => {
+    const fetchListResource = () => {
+      dispatch(fetchListBaseAction({ resource, query: queryParams }));
+    };
+    if(!queryParams) setQueryParams(getQueryParamsUrl());
+    else fetchListResource();
+  }, [dispatch, queryParams, resource]);
+
   // dispatch redux actions
   const deleteResourceById = id => {
     dispatch(deleteDataByIdBaseAction({ resource, id }));
   };
-  // eslint-disable-next-line
-  const [searchText, setSearchText] = useState('');
-  const searchInput = useRef(null);
-  useEffect(() => {
-    const fetchListResource = (query = {}) => {
-      dispatch(fetchListBaseAction({ resource, query }));
-    };
-    fetchListResource();
-  }, [dispatch, resource]);
 
   // handle functions
   const handleSearch = (selectedKeys, confirm) => {
@@ -45,17 +51,27 @@ const AdminTable = ({ children, isActionCol, isSearch = true, resource }) => {
   };
 
   const onChangeTable = (pagination, filters, sorter) => {
-    console.log('pagination', pagination);
-    console.log('filters', filters);
-    console.log('sorter', sorter);
+    const query = {
+      limit: pagination.pageSize,
+      offset: pagination.pageSize*(pagination.current-1),
+    }
+    if(sorter?.field) {
+      query.orderBy = `${sorter.order === "descend" ? "-" : ""}${sorter.field}`;
+    }
+    if(filters) {
+      forEach(filters, (value, key) => {
+        if(!query.filter) query.filter = {};
+        query.filter[key.replace('.$', '')] = { '$regex' : value[0], '$options' : 'i' };
+      })
+    }
+    updateSearchUrl(convertJsonToQueryString(query));
+    setQueryParams(query);
   };
 
   const onRow = record => {
     return {
       onClick: () => {
-        const {location} = history;
-        const {hash, ...newLocation} = location;
-        history.push({...newLocation, hash: `/${resource}/${record.id}`}); 
+        updateHashUrl(`/${resource}/${record.id}`);
       },
     };
   };
@@ -73,12 +89,14 @@ const AdminTable = ({ children, isActionCol, isSearch = true, resource }) => {
         rowKey="_id"
         onChange={onChangeTable}
         onRow={onRow}
+        pagination={{ total: totalResource, defaultPageSize: limitRecords, showSizeChanger: true, size: "small"}}
       >
         {Children.map(children, child => {
           let childProps = {};
           if (isSearch)
             childProps = {
               ...filterSearch(child.props.dataIndex, handleSearch, handleReset, searchInput),
+              sorter: true,
             };
           childProps = {
             ...childProps,
