@@ -1,21 +1,39 @@
-import { getAPI, putAPI, postAPI, delAPI } from 'api';
+import axios from 'axios';
 
 export function getListData(query) {
-  return getAPI('/users', query);
+  return axios({
+    method: 'get',
+    url: `${process.env.REACT_APP_SERVER_URL}/users`,
+    params: query,
+  })
 }
 
 export function getDataById(id) {
-  return getAPI(`/users/${id}`);
+  return axios({
+    method: 'get',
+    url: `${process.env.REACT_APP_SERVER_URL}/users/${id}`,
+  })
 }
 
 export function createNewData(paramsReq) {
-  return postAPI('/users', paramsReq);
+  return axios({
+    method: 'post',
+    url: `${process.env.REACT_APP_SERVER_URL}/users`,
+    data: paramsReq,
+  })
 }
 
 export function updateDataById(id, paramsReq) {
-  return putAPI(`/users/${id}`, paramsReq);
+  return axios({
+    method: 'put',
+    url: `${process.env.REACT_APP_SERVER_URL}/users/${id}`,
+    data: paramsReq,
+  })
 }
 
 export function deleteData(id) {
-  return delAPI(`/users/${id}`);
+  return axios({
+    method: 'delete',
+    url: `${process.env.REACT_APP_SERVER_URL}/users/${id}`,
+  })
 }

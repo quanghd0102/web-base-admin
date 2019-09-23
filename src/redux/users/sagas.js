@@ -16,7 +16,7 @@ function* fetchListDataSaga({ payload = {} }) {
   try {
     const { query } = payload;
     const { data, total } = yield call(getListData, query);
-    yield put(fetchListDataSuccessAction({ data: keyBy(data, res => res.id), total }));
+    yield put(fetchListDataSuccessAction({ data: keyBy(data.data, res => res.id), total }));
   } catch (ex) {
     console.error(ex);
     showErrorNoti(ex);
@@ -26,7 +26,7 @@ function* fetchListDataSaga({ payload = {} }) {
 function* fetchDataByIdSaga({ payload = {} }) {
   try {
     const { id } = payload;
-    const data = yield call(getDataById, id);
+    const {data} = yield call(getDataById, id);
     yield put(fetchDataByIdSuccessAction({ data }));
   } catch (ex) {
     console.error(ex);
